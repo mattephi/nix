@@ -32,13 +32,19 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
+      "nvidia-drm.modeset=1"  # Enable KMS
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  # Helps with suspend/resume
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
     loader.timeout = 0;
-
+    extraModprobeConfig = ''
+      options nvidia-drm modeset=1
+      softdep nvidia pre: nvidia-drm
+    '';
   };
+  # boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_drm" "nvidia_uvm" ];
 
   # Use latest kernel.
   security.sudo.wheelNeedsPassword = false;
@@ -52,6 +58,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  programs.nm-applet.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Seoul";
@@ -74,27 +81,48 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    desktopManager.gnome.enable = true;
     xkb = {
       layout = "us,ru";
       options = "grp:ctrl_space_toggle";
     };
     exportConfiguration = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-
+    screenSection = ''
+      Option "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+      Option "TripleBuffer" "on"
+    '';
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.blueman.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   hardware.graphics.enable = true;
   hardware.nvidia.modesetting.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
   security.rtkit.enable = true;
+  services.avahi.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -102,7 +130,35 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
+    wireplumber.extraConfig."10-bluez" = {
+      "monitor.bluez.properties" = {
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-msbc" = true;
+        "bluez5.enable-hw-volume" = true;
+        "bluez5.roles" = [
+          "hsp_hs"
+          "hsp_ag"
+          "hfp_hf"
+          "hfp_ag"
+        ];
+      };
+      raopOpenFirewall = true;
 
+  extraConfig.pipewire = {
+    "10-airplay" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-raop-discover";
+
+          # increase the buffer size if you get dropouts/glitches
+          # args = {
+          #   "raop.latency.ms" = 500;
+          # };
+        }
+      ];
+    };
+  };
+    };
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
@@ -130,7 +186,7 @@
   };
 
   environment.sessionVariables = {
-    # NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
@@ -149,15 +205,13 @@
     }))
     pkgs.dunst
     pkgs.xorg.xeyes
-    pkgs.vscode
-    pkgs.google-chrome
     pkgs.nixfmt-classic
     telegram-desktop
     libnotify
     rofi-wayland
     pkgs.krusader
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
+    pkgs.pavucontrol
+    pkgs.egl-wayland
   ];
   fonts.packages = with pkgs;
     [

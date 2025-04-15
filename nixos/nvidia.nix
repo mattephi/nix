@@ -9,10 +9,11 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
+    modesetting.enable = true; # Required for Wayland
+    powerManagement.enable = true; # Required for hibernate
     powerManagement.finegrained = false;
-    open = false;
+    forceFullCompositionPipeline = false; # NOTE: may cause issues with WebGL
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
