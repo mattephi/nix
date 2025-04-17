@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -14,11 +14,19 @@
     niri.url = "github:sodiboo/niri-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      niri,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-    in {
+    in
+    {
       # Available through 'nixos-rebuild --flake .#mattenix'
       nixosConfigurations = {
         mattenix = nixpkgs.lib.nixosSystem {

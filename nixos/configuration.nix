@@ -2,15 +2,26 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, outputs, lib, config, pkgs, ... }:
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nvidia.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # Bootloader.
   powerManagement.enable = true;
   boot = {
@@ -19,7 +30,7 @@
       efi.canTouchEfiVariables = true;
     };
 
-    resumeDevice = "/dev/disk/by-uuid/7a1a9f79-7595-4947-be71-3e6976385f63";
+    #resumeDevice = "/dev/disk/by-uuid/7a1a9f79-7595-4947-be71-3e6976385f63";
 
     kernelPackages = pkgs.linuxPackages_latest;
 
@@ -32,8 +43,8 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
-      "nvidia-drm.modeset=1"  # Enable KMS
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  # Helps with suspend/resume
+      "nvidia-drm.modeset=1" # Enable KMS
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1" # Helps with suspend/resume
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -85,7 +96,7 @@
       enable = true;
       wayland = true;
     };
-    desktopManager.gnome.enable = true;
+    desktopManager.gnome.enable = false;
     xkb = {
       layout = "us,ru";
       options = "grp:ctrl_space_toggle";
@@ -117,7 +128,10 @@
   };
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = [ "network.target" "sound.target" ];
+    after = [
+      "network.target"
+      "sound.target"
+    ];
     wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
@@ -144,20 +158,20 @@
       };
       raopOpenFirewall = true;
 
-  extraConfig.pipewire = {
-    "10-airplay" = {
-      "context.modules" = [
-        {
-          name = "libpipewire-module-raop-discover";
+      extraConfig.pipewire = {
+        "10-airplay" = {
+          "context.modules" = [
+            {
+              name = "libpipewire-module-raop-discover";
 
-          # increase the buffer size if you get dropouts/glitches
-          # args = {
-          #   "raop.latency.ms" = 500;
-          # };
-        }
-      ];
-    };
-  };
+              # increase the buffer size if you get dropouts/glitches
+              # args = {
+              #   "raop.latency.ms" = 500;
+              # };
+            }
+          ];
+        };
+      };
     };
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -171,12 +185,16 @@
   users.users.mattephi = {
     isNormalUser = true;
     description = "mattephi";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs;
-      [
-        #  thunderbird
-      ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [
+      #  thunderbird
+    ];
   };
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   # Install firefox.
   # programs.firefox.enable = true;
@@ -190,38 +208,42 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
+  environment.shells = [ pkgs.zsh ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    pkgs.gh
-    pkgs.ghostty
-    pkgs.helix
-    pkgs.home-manager
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
+    gh
+    helix
+    texlive.combined.scheme-full
+    home-manager
+    (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
-    pkgs.dunst
-    pkgs.xorg.xeyes
-    pkgs.nixfmt-classic
+    dunst
+    xorg.xeyes
+    nixfmt-rfc-style
     telegram-desktop
     libnotify
     rofi-wayland
-    pkgs.krusader
-    pkgs.pavucontrol
-    pkgs.egl-wayland
+    krusader
+    pavucontrol
+    egl-wayland
   ];
-  fonts.packages = with pkgs;
+  fonts.packages =
+    with pkgs;
     [
       font-awesome
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
       jetbrains-mono
-    ] ++ builtins.filter lib.attrsets.isDerivation
-    (builtins.attrValues pkgs.nerd-fonts);
+      lmodern # NOTE: for TexLive
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   system.stateVersion = "25.05";
 }

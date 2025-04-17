@@ -1,4 +1,5 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
   home = {
     username = "mattephi";
     homeDirectory = "/home/mattephi";
@@ -7,6 +8,26 @@
 
   # Enable home-manager self-management
   programs.home-manager.enable = true;
+
+  xdg.desktopEntries = {
+    code = {
+      exec = "code --use-gl=desktop %F";
+      icon = "vscode";
+      mimeType = [ "x-scheme-handler/vscode" ];
+      name = "Visual Studio Code";
+      startupNotify = true;
+      type = "Application";
+    };
+    code-url-handler = {
+      exec = "code --use-gl=desktop --open-url %U";
+      icon = "vscode";
+      mimeType = [ "x-scheme-handler/vscode" ];
+      name = "Visual Studio Code - URL Handler";
+      noDisplay = true;
+      startupNotify = true;
+      type = "Application";
+    };
+  };
 
   home.packages = with pkgs; [
     # Discord without GPU acceleration
@@ -22,15 +43,15 @@
     # VSCode without GPU acceleration
     # NOTE: it is non-fhs version, hence plugin
     # management should be manual
-    (pkgs.writeShellApplication {
-      name = "code";
-      text = "${pkgs.vscode}/bin/code --use-gl=desktop";
-    })
-    (pkgs.makeDesktopItem {
-      name = "Visual Studio Code";
-      exec = "code";
-      desktopName = "Visual Studio Code";
-    })
+    # (pkgs.writeShellApplication {
+    #   name = "code";
+    #   text = "${pkgs.vscode}/bin/code --use-gl=desktop";
+    # })
+    # (pkgs.makeDesktopItem {
+    #   name = "Visual Studio Code";
+    #   exec = "code";
+    #   desktopName = "Visual Studio Code";
+    # })
     # Logseq with explicit sync
     (pkgs.writeShellApplication {
       name = "logseq";
@@ -58,7 +79,9 @@
     enable = true;
     userName = "mattephi";
     userEmail = "contact@mattephi.com";
-    extraConfig = { init.defaultBranch = "master"; };
+    extraConfig = {
+      init.defaultBranch = "master";
+    };
   };
 
   # Gracefully handle services restart
@@ -67,5 +90,9 @@
   imports = [
     # Hyprland configuration
     ./modules/hyprland.nix
+    ./modules/ghostty.nix
+    ./modules/zsh.nix
+    ./modules/vscode.nix
+    ./modules/zathura.nix
   ];
 }
