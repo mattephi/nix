@@ -15,8 +15,9 @@
       ];
 
       env = [
-        "XCURSOR_SIZE,18"
+        "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,18"
+        "XCURSOR_THEME,macOS"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"

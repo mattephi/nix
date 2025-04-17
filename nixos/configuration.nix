@@ -220,9 +220,6 @@
     helix
     texlive.combined.scheme-full
     home-manager
-    (waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
     dunst
     xorg.xeyes
     nixfmt-rfc-style
@@ -232,6 +229,7 @@
     krusader
     pavucontrol
     egl-wayland
+    apple-cursor
   ];
   fonts.packages =
     with pkgs;

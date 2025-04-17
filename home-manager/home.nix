@@ -90,6 +90,7 @@
   imports = [
     # Hyprland configuration
     ./modules/hyprland.nix
+    ./modules/waybar.nix
     ./modules/ghostty.nix
     ./modules/zsh.nix
     ./modules/vscode.nix
