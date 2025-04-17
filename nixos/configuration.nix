@@ -30,7 +30,7 @@
       efi.canTouchEfiVariables = true;
     };
 
-    #resumeDevice = "/dev/disk/by-uuid/7a1a9f79-7595-4947-be71-3e6976385f63";
+    resumeDevice = "/dev/disk/by-uuid/1fbf0800-cdd0-44d5-9657-b92a67028369";
 
     kernelPackages = pkgs.linuxPackages_latest;
 
