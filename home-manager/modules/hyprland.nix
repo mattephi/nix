@@ -88,10 +88,16 @@
         follow_mouse = 1;
       };
 
-      device = {
-        name = "pulsar-4k-dongle";
-        sensitivity = -1.5;
-      };
+      device = [
+        {
+          name = "pulsar-4k-dongle";
+          sensitivity = -1.5;
+        }
+        {
+          name = "heatmoving-pulsar-mouse";
+          sensitivity = -1.5;
+        }
+      ];
 
       ecosystem = {
         no_update_news = true;
