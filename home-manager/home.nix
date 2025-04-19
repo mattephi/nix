@@ -6,23 +6,31 @@
     stateVersion = "25.05";
   };
 
-  # Enable home-manager self-management
-  programs.home-manager.enable = true;
-
-  home.packages = with pkgs; [
-    logseq
-    discord
-  ];
-
-  # Git configuration
-  programs.git = {
-    enable = true;
-    userName = "mattephi";
-    userEmail = "contact@mattephi.com";
-    extraConfig = {
-      init.defaultBranch = "master";
+  programs = {
+    home-manager.enable = true;
+    git = {
+      enable = true;
+      userName = "mattephi";
+      userEmail = "contact@mattephi.com";
+      extraConfig = {
+        init.defaultBranch = "master";
+      };
     };
   };
+
+  home.packages = with pkgs; [
+    gh
+    logseq
+    discord
+    krusader # File manager
+    xorg.xeyes
+    apple-cursor # XCURSOR theme
+    rofi-wayland # Application launcher
+    google-chrome
+    wlx-overlay-s # VR overlay
+    telegram-desktop
+    nixfmt-rfc-style
+  ];
 
   # Gracefully handle services restart
   systemd.user.startServices = "sd-switch";

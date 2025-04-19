@@ -3,6 +3,7 @@ let
   commonSettings = {
     "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
     "editor.fontSize" = 12;
+    "git.confirmSync" = false;
   };
   commonExtensions = with pkgs.vscode-extensions; [
     github.copilot

@@ -24,23 +24,21 @@
     in
     {
       # Available through 'nixos-rebuild --flake .#mattenix'
-      nixosConfigurations = {
-        mattenix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs system; };
-          modules = [
-            { nixpkgs.overlays = overlays; }
-            ./nixos/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.mattephi = ./home-manager/home.nix;
-              home-manager.extraSpecialArgs = {
-                inherit inputs outputs system;
-              };
-            }
-          ];
-        };
+      nixosConfigurations.mattenix = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs system; };
+        modules = [
+          { nixpkgs.overlays = overlays; }
+          ./nixos/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.mattephi = ./home-manager/home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs system;
+            };
+          }
+        ];
       };
     };
 }
