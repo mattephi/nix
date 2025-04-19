@@ -4,6 +4,7 @@ let
     "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
     "editor.fontSize" = 12;
     "git.confirmSync" = false;
+    "git.autofetch" = true;
   };
   commonExtensions = with pkgs.vscode-extensions; [
     github.copilot
