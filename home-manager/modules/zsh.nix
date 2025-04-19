@@ -9,9 +9,6 @@
     shellAliases = {
       ll = "ls -l";
       la = "ls -la";
-      # TODO: Manage this in vscode module
-      # using derivations or anything else
-      code = "code --use-gl=desktop";
     };
     history.size = 10000;
   };

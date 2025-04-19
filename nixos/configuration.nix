@@ -188,6 +188,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       #  thunderbird
@@ -212,6 +213,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.cudaSupport = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -230,7 +232,20 @@
     pavucontrol
     egl-wayland
     apple-cursor
+    wlx-overlay-s
+    btop
+    google-chrome
   ];
+
+  virtualisation.docker.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   fonts.packages =
     with pkgs;
     [
@@ -242,6 +257,42 @@
       lmodern # NOTE: for TexLive
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
+  services.wivrn = {
+    enable = true;
+    openFirewall = true;
+
+    # Write information to /etc/xdg/openxr/1/active_runtime.json, VR applications
+    # will automatically read this and work with WiVRn (Note: This does not currently
+    # apply for games run in Valve's Proton)
+    defaultRuntime = true;
+
+    # Run WiVRn as a systemd service on startup
+    autoStart = false;
+
+    # Config for WiVRn (https://github.com/WiVRn/WiVRn/blob/master/docs/configuration.md)
+    config = {
+      enable = true;
+
+      json = {
+        # 1.0x foveation scaling
+        scale = 1.0;
+        # 100 Mb/s
+        bitrate = 200000000;
+        encoders = [
+          {
+            encoder = "nvenc";
+            codec = "h265";
+            # 1.0 x 1.0 scaling
+            width = 1.0;
+            height = 1.0;
+            offset_x = 0.0;
+            offset_y = 0.0;
+          }
+        ];
+      };
+    };
+  };
 
   system.stateVersion = "25.05";
 }
