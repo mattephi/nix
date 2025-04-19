@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # Power management is required for hibernation
   powerManagement.enable = true;
