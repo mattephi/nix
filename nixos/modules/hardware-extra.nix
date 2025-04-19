@@ -40,11 +40,12 @@
       options nvidia-drm modeset=1
       softdep nvidia pre: nvidia-drm
     '';
-    initrd.kernelModules = [
-      "nvidia"
-      "nvidia_modeset"
-      "nvidia_drm"
-      "nvidia_uvm"
-    ];
+    # Somehow this breakes hibernation, AVOID
+    # initrd.kernelModules = [
+    #   "nvidia"
+    #   "nvidia_modeset"
+    #   "nvidia_drm"
+    #   "nvidia_uvm"
+    # ];
   };
 }
