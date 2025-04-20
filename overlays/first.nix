@@ -22,7 +22,17 @@ final: prev: {
     postInstall = ''
       ${old.postInstall or ""}
       wrapProgram $out/bin/logseq \
-        --add-flags "--enable-features=WaylandLinuxDrmSyncobj"
+        --add-flags --use-gl=desktop"
+        "
+    '';
+  });
+  discord = prev.discord.overrideAttrs (old: {
+    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
+    postInstall = ''
+      ${old.postInstall or ""}
+      wrapProgram $out/bin/discord \
+        --add-flags --use-gl=desktop"
+        "
     '';
   });
 }

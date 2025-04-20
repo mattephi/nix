@@ -1,5 +1,8 @@
 { inputs, pkgs, ... }:
 {
+
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
