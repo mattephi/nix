@@ -2,6 +2,7 @@
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    enableFishIntegration = true;
 
     settings = {
       font-family = "JetBrains Mono";

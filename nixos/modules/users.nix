@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   users = {
-    defaultUserShell = pkgs.zsh;
-
     users = {
       mattephi = {
         isNormalUser = true;
@@ -12,6 +10,7 @@
           "wheel"
           "docker"
         ];
+        shell = pkgs.fish;
       };
     };
   };

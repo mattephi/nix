@@ -17,29 +17,36 @@
   hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    glib
     btop # System monitor
     dunst # Notification daemon
+    unzip
     libnotify
-    xorg.libX11
     pavucontrol
     egl-wayland
     home-manager
     texlive.combined.scheme-full
+
+    # Required for some applications
+    # For example Isaac
+    libGL
+    libGLU
+    util-linux
+    xorg.libSM
+    xorg.libXt
+    xorg.libICE
+    xorg.libX11
+    libxcrypt-legacy
   ];
 
   programs = {
     zsh.enable = true;
+    fish.enable = true;
     nm-applet.enable = true;
 
     hyprland = {
       enable = true;
       xwayland.enable = true;
-    };
-
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
     };
   };
 

@@ -4,7 +4,10 @@
   security.sudo.wheelNeedsPassword = false;
 
   environment = {
-    shells = [ pkgs.zsh ];
+    shells = [
+      pkgs.zsh
+      pkgs.fish
+    ];
 
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Force wayland

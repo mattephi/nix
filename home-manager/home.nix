@@ -19,7 +19,6 @@
   };
 
   home.packages = with pkgs; [
-    gh
     logseq
     discord
     krusader # File manager
@@ -37,11 +36,12 @@
 
   imports = [
     # Hyprland configuration
-    ./modules/hyprland.nix
-    ./modules/waybar.nix
-    ./modules/ghostty.nix
     ./modules/zsh.nix
+    ./modules/fish.nix
+    ./modules/waybar.nix
     ./modules/vscode.nix
     ./modules/zathura.nix
+    ./modules/ghostty.nix
+    ./modules/hyprland.nix
   ];
 }
