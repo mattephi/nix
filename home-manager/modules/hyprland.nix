@@ -1,7 +1,6 @@
 { inputs, pkgs, ... }:
 {
-
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal ];
+  services.hyprpolkitagent.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -123,6 +122,11 @@
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen"
+        # Screencapture
+        "SUPER_CTRL_SHIFT, 4, exec, hyprshot -m region --clipboard-only"
+        "SUPER_CTRL, 4, exec, hyprshot -m region -o /home/mattephi/Pictures/Hyprshot"
+        "SUPER_CTRL_SHIFT, 3, exec, hyprshot -m output --clipboard-only"
+        "SUPER_CTRL, 3, exec, hyprshot -m output -o /home/mattephi/Pictures/Hyprshot"
         # Scratchpad
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"

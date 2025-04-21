@@ -19,10 +19,12 @@
   };
 
   home.packages = with pkgs; [
+    nemo
     zotero
     logseq
     discord
-    krusader # File manager
+    hyprshot
+    oculante
     xorg.xeyes
     apple-cursor # XCURSOR theme
     rofi-wayland # Application launcher
@@ -36,7 +38,7 @@
   systemd.user.startServices = "sd-switch";
 
   imports = [
-    # Hyprland configuration
+    ./modules/xdg.nix
     ./modules/zsh.nix
     ./modules/fish.nix
     ./modules/waybar.nix

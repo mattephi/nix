@@ -33,6 +33,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.users.mattephi = ./home-manager/home.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs outputs system;
