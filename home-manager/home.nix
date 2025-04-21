@@ -27,7 +27,6 @@
     oculante
     xorg.xeyes
     apple-cursor # XCURSOR theme
-    rofi-wayland # Application launcher
     google-chrome
     wlx-overlay-s # VR overlay
     telegram-desktop
@@ -40,6 +39,7 @@
   imports = [
     ./modules/xdg.nix
     ./modules/zsh.nix
+    ./modules/rofi.nix
     ./modules/fish.nix
     ./modules/waybar.nix
     ./modules/vscode.nix
