@@ -19,6 +19,7 @@
   };
 
   home.packages = with pkgs; [
+    zotero
     logseq
     discord
     krusader # File manager
@@ -43,5 +44,6 @@
     ./modules/zathura.nix
     ./modules/ghostty.nix
     ./modules/hyprland.nix
+    ./modules/nix-index.nix
   ];
 }
