@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  pkgs,
+  sops-nix,
+  nix-index-database,
+  ...
+}:
 {
   home = {
     username = "mattephi";
@@ -20,6 +25,7 @@
 
   home.packages = with pkgs; [
     nemo
+    codex
     zotero
     logseq
     discord
@@ -31,6 +37,11 @@
     wlx-overlay-s # VR overlay
     telegram-desktop
     nixfmt-rfc-style
+
+    # Wine support
+    wineWowPackages.staging
+    # wineWowPackages.waylandFull
+
   ];
 
   # Gracefully handle services restart
@@ -47,5 +58,7 @@
     ./modules/ghostty.nix
     ./modules/hyprland.nix
     ./modules/nix-index.nix
+    nix-index-database.hmModules.nix-index
+    { programs.nix-index-database.comma.enable = true; }
   ];
 }

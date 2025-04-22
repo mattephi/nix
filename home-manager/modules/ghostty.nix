@@ -1,7 +1,6 @@
 {
   programs.ghostty = {
     enable = true;
-    enableZshIntegration = true;
     enableFishIntegration = true;
 
     settings = {
@@ -10,6 +9,7 @@
       theme = "GruvboxDark";
       window-padding-x = 5;
       window-padding-y = 1;
+      confirm-close-surface = false;
     };
   };
 }

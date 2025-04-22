@@ -114,7 +114,7 @@
       # Binds section
       "$mainMod" = "SUPER";
       "$terminal" = "ghostty";
-      "$menu" = "pkill rofi || rofi -matching fuzzy -show drun -modes drun,window,ssh -show-icons";
+      "$menu" = "pkill rofi || rofi -show drun -modes drun,window,ssh -show-icons";
 
       bind = [
         # Session control
