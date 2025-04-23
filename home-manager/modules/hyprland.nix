@@ -6,7 +6,7 @@
     enable = true;
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
-    plugins = [ pkgs.hyprlandPlugins.hyprscroller ];
+    plugins = [ ];
     # Disable packages, since we are using NixOS module.
     package = null;
     portalPackage = null;
@@ -40,7 +40,7 @@
         border_size = 1;
         "col.active_border" = "rgba(ff6550ee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
-        layout = "scroller";
+        layout = "dwindle";
       };
 
       decoration = {
@@ -160,26 +160,6 @@
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
-        # Hyprscroller
-        "$mainMod, slash, scroller:jump"
-        # Hyprscroller:movement
-        "$mainMod CTRL, left, movewindow, l"
-        "$mainMod CTRL, right, movewindow, r"
-        "$mainMod CTRL, up, movewindow, u"
-        "$mainMod CTRL, down, movewindow, d"
-        "$mainMod ALT, left, movewindow, l, nomode"
-        "$mainMod ALT, right, movewindow, r, nomode"
-        "$mainMod ALT, up, movewindow, u, nomode"
-        "$mainMod ALT, down, movewindow, d, nomode"
-        # Hyprscoller:modes
-        "$mainMod, bracketleft, scroller:setmode, row"
-        "$mainMod, bracketright, scroller:setmode, col"
-        "$mainMod, P, scroller:pin"
-        "$mainMod, tab, scroller:toggleoverview"
-        "$mainMod, I, scroller:admitwindow,"
-        "$mainMod, O, scroller:expelwindow,"
-        "$mainMod SHIFT, I, scroller:admitwindow, r"
-        "$mainMod SHIFT, O, scroller:expelwindow, l"
       ];
 
       bindm = [
@@ -192,91 +172,6 @@
     # NOTE: It is impossible to convert all the binds because
     # of the issues with submaps syntax, which is currently not
     # implemented in the home-manager module.
-    extraConfig = ''
-      # Hyprscroller Submaps
-
-      # Sizes submap
-      # will switch to a submap called sizing
-      bind = $mainMod, r, submap, sizing
-      # will start a submap called "align"
-      submap = sizing
-      # sets repeatable binds for aligning the active window
-      bind = , 1, scroller:setsize, oneeighth
-      bind = , 1, submap, reset
-      bind = , 2, scroller:setsize, onesixth
-      bind = , 2, submap, reset
-      bind = , 3, scroller:setsize, onefourth
-      bind = , 3, submap, reset
-      bind = , 4, scroller:setsize, onethird
-      bind = , 4, submap, reset
-      bind = , 5, scroller:setsize, threeeighths
-      bind = , 5, submap, reset
-      bind = , 6, scroller:setsize, onehalf
-      bind = , 6, submap, reset
-      bind = , 7, scroller:setsize, fiveeighths
-      bind = , 7, submap, reset
-      bind = , 8, scroller:setsize, twothirds
-      bind = , 8, submap, reset
-      bind = , 9, scroller:setsize, threequarters
-      bind = , 9, submap, reset
-      bind = , 0, scroller:setsize, fivesixths
-      bind = , 0, submap, reset
-      bind = , minus, scroller:setsize, seveneighths
-      bind = , minus, submap, reset
-      bind = , equal, scroller:setsize, one
-      bind = , equal, submap, reset
-      # use reset to go back to the global submap
-      bind = , escape, submap, reset
-      # will reset the submap, meaning end the current one and return to the global one
-      submap = reset
-
-      # Center submap
-      # will switch to a submap called center
-      bind = $mainMod, C, submap, center
-      # will start a submap called "center"
-      submap = center
-      # sets repeatable binds for resizing the active window
-      bind = , C, scroller:alignwindow, c
-      bind = , C, submap, reset
-      bind = , m, scroller:alignwindow, m
-      bind = , m, submap, reset
-      bind = , right, scroller:alignwindow, r
-      bind = , right, submap, reset
-      bind = , left, scroller:alignwindow, l
-      bind = , left, submap, reset
-      bind = , up, scroller:alignwindow, u
-      bind = , up, submap, reset
-      bind = , down, scroller:alignwindow, d
-      bind = , down, submap, reset
-      # use reset to go back to the global submap
-      bind = , escape, submap, reset
-      # will reset the submap, meaning end the current one and return to the global one
-      submap = reset
-
-      # Fit size submap
-      # will switch to a submap called fitsize
-      bind = $mainMod, W, submap, fitsize
-      # will start a submap called "fitsize"
-      submap = fitsize
-      # sets binds for fitting columns/windows in the screen
-      bind = , W, scroller:fitsize, visible
-      bind = , W, submap, reset
-      bind = , right, scroller:fitsize, toend
-      bind = , right, submap, reset
-      bind = , left, scroller:fitsize, tobeg
-      bind = , left, submap, reset
-      bind = , up, scroller:fitsize, active
-      bind = , up, submap, reset
-      bind = , down, scroller:fitsize, all
-      bind = , down, submap, reset
-      bind = , bracketleft, scroller:fitwidth, all
-      bind = , bracketleft, submap, reset
-      bind = , bracketright, scroller:fitheight, all
-      bind = , bracketright, submap, reset
-      # use reset to go back to the global submap
-      bind = , escape, submap, reset
-      # will reset the submap, meaning end the current one and return to the global one
-      submap = reset
-    '';
+    extraConfig = '''';
   };
 }

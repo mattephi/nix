@@ -21,15 +21,14 @@
       home-manager,
       nix-vscode-extensions,
       nix-index-database,
-      sops-nix,
       ...
     }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
       overlays = [
-        (import ./overlays/first.nix)
         nix-vscode-extensions.overlays.default
+        (import ./overlays/first.nix)
       ];
     in
     {
@@ -50,7 +49,6 @@
             home-manager.users.mattephi = ./home-manager/home.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              inherit (inputs) sops-nix;
               inherit (inputs) nix-index-database;
             };
           }
