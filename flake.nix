@@ -35,8 +35,7 @@
       # Available through 'nixos-rebuild --flake .#mattenix'
       nixosConfigurations.mattenix = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs outputs system;
-          inherit (inputs) hyprland;
+          inherit inputs system;
         };
         modules = [
           { nixpkgs.overlays = overlays; }
@@ -46,10 +45,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.mattephi = ./home-manager/home.nix;
+            home-manager.users.mattephi = ./home/home.nix;
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              inherit (inputs) nix-index-database;
             };
           }
         ];

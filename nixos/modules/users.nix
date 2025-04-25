@@ -9,6 +9,7 @@
           "networkmanager"
           "wheel"
           "docker"
+          "adbusers"
         ];
         shell = pkgs.fish;
       };

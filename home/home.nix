@@ -1,7 +1,6 @@
 {
+  inputs,
   pkgs,
-  sops-nix,
-  nix-index-database,
   ...
 }:
 {
@@ -48,17 +47,7 @@
   systemd.user.startServices = "sd-switch";
 
   imports = [
-    ./modules/xdg.nix
-    ./modules/zsh.nix
-    ./modules/rofi.nix
-    ./modules/fish.nix
-    ./modules/waybar.nix
-    ./modules/vscode.nix
-    ./modules/zathura.nix
-    ./modules/ghostty.nix
-    ./modules/hyprland.nix
-    ./modules/nix-index.nix
-    nix-index-database.hmModules.nix-index
-    { programs.nix-index-database.comma.enable = true; }
+    inputs.nix-index-database.hmModules.nix-index
+    ./apps
   ];
 }

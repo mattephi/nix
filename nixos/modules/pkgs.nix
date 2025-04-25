@@ -1,6 +1,6 @@
 {
+  inputs,
   pkgs,
-  hyprland,
   system,
   ...
 }:
@@ -24,7 +24,6 @@
   environment.systemPackages = with pkgs; [
     glib
     btop # System monitor
-    dunst # Notification daemon
     unzip
     libnotify
     pavucontrol
@@ -48,12 +47,13 @@
     zsh.enable = true;
     fish.enable = true;
     nm-applet.enable = true;
+    adb.enable = true;
 
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = hyprland.packages.${system}.hyprland;
-      portalPackage = hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+      package = inputs.hyprland.packages.${system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
     };
   };
 
