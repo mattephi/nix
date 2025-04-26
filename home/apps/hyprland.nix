@@ -30,6 +30,11 @@
         "GBM_BACKEND,nvidia-drm"
       ];
 
+      # Binds section
+      "$mainMod" = "SUPER";
+      "$terminal" = "ghostty";
+      "$menu" = "pkill rofi || rofi -show drun -modes drun,window,ssh -show-icons";
+
       exec-once = [
         "waybar & dunst & blueman-applet &"
       ];
@@ -38,13 +43,11 @@
         gaps_in = 2;
         gaps_out = 2;
         border_size = 1;
-        "col.active_border" = "rgba(ff6550ee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 3;
+        rounding = 4;
       };
 
       animations = {
@@ -82,6 +85,7 @@
       windowrule = [
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        "opacity 0.85 0.85,class:.*$terminal.*"
       ];
 
       input = {
@@ -110,11 +114,6 @@
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
       };
-
-      # Binds section
-      "$mainMod" = "SUPER";
-      "$terminal" = "ghostty";
-      "$menu" = "pkill rofi || rofi -show drun -modes drun,window,ssh -show-icons";
 
       bind = [
         # Session control

@@ -10,8 +10,11 @@
     stateVersion = "25.05";
   };
 
+  services.hyprpaper.enable = true;
+
   programs = {
     home-manager.enable = true;
+    btop.enable = true;
     git = {
       enable = true;
       userName = "mattephi";

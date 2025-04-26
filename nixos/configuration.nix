@@ -5,6 +5,7 @@
     ./modules/pkgs.nix
     ./modules/fonts.nix
     ./modules/users.nix
+    ./modules/stylix.nix
     ./modules/nvidia.nix
     ./modules/locale.nix
     ./modules/environment.nix

@@ -23,7 +23,6 @@
 
   environment.systemPackages = with pkgs; [
     glib
-    btop # System monitor
     unzip
     libnotify
     pavucontrol

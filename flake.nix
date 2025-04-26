@@ -7,7 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix.url = "github:danth/stylix";
     hyprland.url = "github:hyprwm/Hyprland";
+    nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +19,7 @@
     {
       self,
       nixpkgs,
+      stylix,
       hyprland,
       home-manager,
       nix-vscode-extensions,
@@ -40,6 +43,7 @@
         modules = [
           { nixpkgs.overlays = overlays; }
           ./nixos/configuration.nix
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
