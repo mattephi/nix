@@ -9,6 +9,7 @@ let
     # "editor.fontSize" = 10;
     "git.confirmSync" = false;
     "git.autofetch" = true;
+    "git.repositoryScanMaxDepth" = 5;
     # nixd setup
     "nix.serverPath" = "nixd";
     "nix.enableLanguageServer" = true;
