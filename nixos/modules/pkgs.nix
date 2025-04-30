@@ -78,11 +78,21 @@
     blueman.enable = true;
     printing.enable = true;
     pulseaudio.enable = false;
+    gvfs.enable = true;
+    udisks2.enable = true;
+    devmon.enable = true;
 
-    wivrn = {
+    monado = {
       enable = true;
+      highPriority = true;
       defaultRuntime = true;
+      forceDefaultRuntime = true;
     };
+
+    # wivrn = {
+    #   enable = true;
+    #   defaultRuntime = true;
+    # };
 
     xserver = {
       enable = true;

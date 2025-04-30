@@ -7,6 +7,7 @@
       window-padding-x = 5;
       window-padding-y = 1;
       confirm-close-surface = false;
+      clipboard-paste-protection = false;
     };
   };
 }

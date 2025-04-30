@@ -14,6 +14,11 @@
 
   programs = {
     home-manager.enable = true;
+    jetbrains-remote = {
+      enable = true;
+      ides = with pkgs.jetbrains; [ clion ];
+    };
+    direnv.enable = true;
     btop.enable = true;
     git = {
       enable = true;
@@ -26,6 +31,7 @@
   };
 
   home.packages = with pkgs; [
+    nixd
     nemo
     codex
     zotero
@@ -36,9 +42,10 @@
     xorg.xeyes
     apple-cursor # XCURSOR theme
     google-chrome
-    wlx-overlay-s # VR overlay
+    # wlx-overlay-s # VR overlay
     telegram-desktop
     nixfmt-rfc-style
+    nix-output-monitor
 
     # Wine support
     wineWowPackages.staging

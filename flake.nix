@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
       stylix,
       hyprland,
       home-manager,
+      nixpkgs-xr,
       nix-vscode-extensions,
       nix-index-database,
       ...
@@ -35,6 +37,7 @@
       ];
     in
     {
+      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       # Available through 'nixos-rebuild --flake .#mattenix'
       nixosConfigurations.mattenix = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -44,6 +47,7 @@
           { nixpkgs.overlays = overlays; }
           ./nixos/configuration.nix
           stylix.nixosModules.stylix
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
