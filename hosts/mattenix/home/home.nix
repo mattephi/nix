@@ -14,10 +14,6 @@
 
   programs = {
     home-manager.enable = true;
-    jetbrains-remote = {
-      enable = true;
-      ides = with pkgs.jetbrains; [ clion ];
-    };
     direnv.enable = true;
     btop.enable = true;
     git = {

@@ -1,7 +1,6 @@
 {
   imports = [
     ./xdg.nix
-    ./zsh.nix
     ./rofi.nix
     ./fish.nix
     ./dunst.nix

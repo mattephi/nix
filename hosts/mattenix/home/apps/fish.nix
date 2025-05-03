@@ -29,14 +29,6 @@
         name = "humantime-fish";
         src = humantime-fish.src;
       }
-      {
-        name = "colored-man-pages";
-        src = colored-man-pages.src;
-      }
-      {
-        name = "fish-you-should-use";
-        src = fish-you-should-use.src;
-      }
     ];
 
     functions = {
