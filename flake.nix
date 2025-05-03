@@ -39,26 +39,28 @@
     {
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       # Available through 'nixos-rebuild --flake .#mattenix'
-      nixosConfigurations.mattenix = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs system;
+      nixosConfigurations = {
+        mattenix = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs system;
+          };
+          modules = [
+            { nixpkgs.overlays = overlays; }
+            ./nixos/configuration.nix
+            stylix.nixosModules.stylix
+            nixpkgs-xr.nixosModules.nixpkgs-xr
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-backup";
+              home-manager.users.mattephi = ./home/home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+            }
+          ];
         };
-        modules = [
-          { nixpkgs.overlays = overlays; }
-          ./nixos/configuration.nix
-          stylix.nixosModules.stylix
-          nixpkgs-xr.nixosModules.nixpkgs-xr
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.mattephi = ./home/home.nix;
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
-          }
-        ];
       };
     };
 }
