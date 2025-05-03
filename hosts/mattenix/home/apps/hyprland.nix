@@ -152,7 +152,7 @@
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
         # App Management
-        "$mainMod, T, exec, $terminal"
+        "$mainMod, ENTER, exec, $terminal"
         "$mainMod, SPACE, exec, $menu"
         # Window Movement
         "$mainMod, left, movefocus, l"

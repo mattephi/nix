@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
     hyprland.url = "github:hyprwm/Hyprland";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
@@ -19,13 +23,14 @@
   outputs =
     {
       self,
-      nixpkgs,
+      disko,
       stylix,
+      nixpkgs,
       hyprland,
-      home-manager,
       nixpkgs-xr,
-      nix-vscode-extensions,
+      home-manager,
       nix-index-database,
+      nix-vscode-extensions,
       ...
     }@inputs:
     let
@@ -46,7 +51,7 @@
           };
           modules = [
             { nixpkgs.overlays = overlays; }
-            ./nixos/configuration.nix
+            ./hosts/mattenix/nixos/configuration.nix
             stylix.nixosModules.stylix
             nixpkgs-xr.nixosModules.nixpkgs-xr
             home-manager.nixosModules.home-manager
@@ -54,11 +59,21 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "hm-backup";
-              home-manager.users.mattephi = ./home/home.nix;
+              home-manager.users.mattephi = ./hosts/mattenix/home/home.nix;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
               };
             }
+          ];
+        };
+        ns-alpha = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/ns-alpha/nixos/configuration.nix
           ];
         };
       };

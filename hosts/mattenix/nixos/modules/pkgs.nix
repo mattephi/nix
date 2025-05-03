@@ -22,6 +22,7 @@
   hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    vim
     glib
     unzip
     libnotify
@@ -29,17 +30,6 @@
     egl-wayland
     home-manager
     texlive.combined.scheme-full
-
-    # Required for some applications
-    # For example Isaac
-    libGL
-    libGLU
-    util-linux
-    xorg.libSM
-    xorg.libXt
-    xorg.libICE
-    xorg.libX11
-    libxcrypt-legacy
   ];
 
   programs = {
