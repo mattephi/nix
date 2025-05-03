@@ -8,7 +8,6 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       jetbrains-mono
-      lmodern # Useful for TexLive
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

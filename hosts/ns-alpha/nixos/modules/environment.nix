@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  networking.hostName = "mattenixs";
+  networking.hostName = "ns-alpha";
   security.sudo.wheelNeedsPassword = false;
 
   environment = {
