@@ -39,6 +39,7 @@
       overlays = [
         nix-vscode-extensions.overlays.default
         (import ./overlays/first.nix)
+        (import ./overlays/packaging.nix)
       ];
     in
     {

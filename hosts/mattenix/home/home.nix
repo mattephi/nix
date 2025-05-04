@@ -16,6 +16,7 @@
     home-manager.enable = true;
     direnv.enable = true;
     btop.enable = true;
+    qutebrowser.enable = true;
     git = {
       enable = true;
       userName = "mattephi";
@@ -33,10 +34,12 @@
     zotero
     logseq
     discord
+    obsidian
     hyprshot
     oculante
     xorg.xeyes
     apple-cursor # XCURSOR theme
+    mtprotoproxy
     google-chrome
     # wlx-overlay-s # VR overlay
     telegram-desktop
