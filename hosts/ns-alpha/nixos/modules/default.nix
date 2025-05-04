@@ -1,5 +1,6 @@
 {
   imports = [
+    ./sops.nix
     ./pkgs.nix
     ./users.nix
     ./fonts.nix

@@ -28,9 +28,11 @@
   };
 
   home.packages = with pkgs; [
+    sops
     nixd
     nemo
     codex
+    neovim
     zotero
     logseq
     discord
@@ -39,7 +41,6 @@
     oculante
     xorg.xeyes
     apple-cursor # XCURSOR theme
-    mtprotoproxy
     google-chrome
     # wlx-overlay-s # VR overlay
     telegram-desktop

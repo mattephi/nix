@@ -1,7 +1,6 @@
 {
   modulesPath,
-  lib,
-  pkgs,
+  inputs,
   ...
 }:
 {

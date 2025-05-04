@@ -1,0 +1,7 @@
+keys:
+  - &primary age14r4f8cpf7qslkdwu2v4lus5xfdzdy4dwql8xvxxkxhs230rdac3sjgexdz
+creation_rules:
+  - path_regex: secrets/config.py$
+    key_groups:
+    - age:
+      - *primary

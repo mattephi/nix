@@ -12,6 +12,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
     hyprland.url = "github:hyprwm/Hyprland";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
@@ -27,6 +31,7 @@
       stylix,
       nixpkgs,
       hyprland,
+      sops-nix,
       nixpkgs-xr,
       home-manager,
       nix-index-database,
@@ -39,7 +44,6 @@
       overlays = [
         nix-vscode-extensions.overlays.default
         (import ./overlays/first.nix)
-        (import ./overlays/packaging.nix)
       ];
     in
     {
@@ -52,8 +56,10 @@
           };
           modules = [
             { nixpkgs.overlays = overlays; }
+            sops-nix.nixosModules.sops
             ./hosts/mattenix/nixos/configuration.nix
             stylix.nixosModules.stylix
+
             nixpkgs-xr.nixosModules.nixpkgs-xr
             home-manager.nixosModules.home-manager
             {
@@ -75,6 +81,7 @@
           modules = [
             { nixpkgs.overlays = overlays; }
             disko.nixosModules.disko
+            sops-nix.nixosModules.sops
             ./hosts/ns-alpha/nixos/configuration.nix
             home-manager.nixosModules.home-manager
             {
