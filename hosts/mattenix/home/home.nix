@@ -36,7 +36,7 @@
     zotero
     logseq
     discord
-    obsidian
+    obsidian-fhs
     hyprshot
     oculante
     xorg.xeyes

@@ -50,4 +50,37 @@ final: prev: {
         "
     '';
   });
+  # FHS obsidian
+  obsidian-fhs =
+    let
+      base = prev.buildFHSEnv {
+        name = "obsidian-fhs";
+        targetPkgs = pkgs: [
+          pkgs.obsidian
+          pkgs.stdenv.cc.cc.lib
+          pkgs.egl-wayland
+          pkgs.bashInteractive
+        ];
+        runScript = ''
+          #!${prev.bashInteractive}/bin/bash
+          exec obsidian "$@"
+        '';
+      };
+      desktop = prev.makeDesktopItem {
+        name = "obsidian-fhs";
+        desktopName = "Obsidian (FHS)";
+        comment = "Knowledge base";
+        icon = "obsidian";
+        exec = "${base}/bin/obsidian-fhs %u";
+        categories = [ "Office" ];
+        mimeTypes = [ "x-scheme-handler/obsidian" ];
+      };
+    in
+    prev.symlinkJoin {
+      name = "obsidian-fhs";
+      paths = [
+        base
+        desktop
+      ];
+    };
 }
