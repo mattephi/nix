@@ -1,38 +1,30 @@
+{ inputs, ... }:
 {
   system.stateVersion = "25.05";
 
-  nix.buildMachines = [
-    {
-      hostName = "threadripper";
-      system = "x86_64-linux";
-      protocol = "ssh-ng";
-      # if the builder supports building for multiple architectures,
-      # replace the previous line by, e.g.
-      # systems = ["x86_64-linux" "aarch64-linux"];
-      maxJobs = 50;
-      speedFactor = 2;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      mandatoryFeatures = [ ];
-    }
-  ];
-  nix.distributedBuilds = true;
-  # optional, useful when the builder has a faster internet connection than yours
-  # nix.extraOptions = ''
-  #   	  builders-use-substitutes = true
-  #   	'';
-
   imports = [
+    inputs.overlays
+    inputs.sops-nix.nixosModules.sops
+    inputs.stylix.nixosModules.stylix
+    inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "hm-backup";
+      home-manager.users.mattephi = ../home/home.nix;
+      home-manager.extraSpecialArgs = {
+        inherit inputs;
+      };
+    }
+
     ./modules/pkgs.nix
     ./modules/fonts.nix
     ./modules/users.nix
     ./modules/stylix.nix
     ./modules/nvidia.nix
     ./modules/locale.nix
+    ./modules/distributed.nix
     ./modules/environment.nix
     ./modules/hardware-extra.nix
     ./hardware-configuration.nix
