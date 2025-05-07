@@ -19,15 +19,14 @@
     extraOptions = "--default-runtime=nvidia";
   };
   networking.networkmanager.enable = true;
+
   hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
-    glib
     unzip
     libnotify
     pavucontrol
-    egl-wayland
     home-manager
     texlive.combined.scheme-full
   ];
