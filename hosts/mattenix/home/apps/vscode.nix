@@ -16,6 +16,7 @@ let
     "nix.formatting" = {
       "command" = "nixfmt";
     };
+    "latex-workshop.formatting.latex" = "latexindent";
     "nixd" = {
       "nixpkgs" = {
         "expr" = "(builtins.getFlake \"/home/mattephi/nix\").inputs.nixpkgs";
@@ -47,6 +48,7 @@ in
   stylix.targets.vscode.profileNames = [
     "default"
     "tex"
+    "cpp"
     "xr"
   ];
   programs.vscode = {
@@ -82,6 +84,15 @@ in
             extensions = with pkgs.vscode-marketplace; [
               james-yu.latex-workshop
               iamhyc.overleaf-workshop
+            ];
+          };
+          cpp = {
+            extensions = with pkgs.vscode-marketplace; [
+              ms-vscode.cpptools
+              ms-vscode.cmake-tools
+              asvetliakov.vscode-neovim
+              ms-vscode.cpptools-themes
+              ms-vscode.cpptools-extension-pack # Needed to remove notification
             ];
           };
           xr = {
