@@ -14,10 +14,6 @@
         src = bass.src;
       }
       {
-        name = "sponge";
-        src = sponge.src;
-      }
-      {
         name = "puffer";
         src = puffer.src;
       }
