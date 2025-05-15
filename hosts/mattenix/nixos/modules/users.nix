@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  nix.settings.trusted-users = [
+    "root"
+    "mattephi"
+  ];
+
   users = {
     users = {
       mattephi = {

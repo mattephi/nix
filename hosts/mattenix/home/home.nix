@@ -28,13 +28,15 @@
   };
 
   home.packages = with pkgs; [
+    gcc # TODO: remove
     sops
     nixd
     nemo
-    codex
+    codex # TODO: configure secret
     neovim
+    devenv
     zotero
-    logseq
+    logseq # TODO: remove
     discord
     obsidian-fhs
     hyprshot
