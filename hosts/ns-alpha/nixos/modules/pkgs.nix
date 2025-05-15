@@ -20,14 +20,14 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      3366
+      80
+      443
       8443
     ];
   };
 
   environment.systemPackages = with pkgs; [
     git
-    unzip
   ];
 
   programs = {
@@ -41,6 +41,17 @@
   services.mtprotoproxy = {
     enable = true;
     users = { };
+  };
+
+  services.caddy = {
+    enable = true;
+    configFile = "${config.sops.templates."Caddyfile".path}";
+    package = pkgs.caddy.withPlugins {
+      plugins = [
+        "github.com/mholt/caddy-webdav@v0.0.0-20241008162340-42168ba04c9d"
+      ];
+      hash = "sha256-rrkUDnTPKehdKMBDaZdFbaEL2QOsHb3tn6dst2UclE8=";
+    };
   };
 
   systemd.services.mtprotoproxy.serviceConfig = {
