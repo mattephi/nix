@@ -16,11 +16,18 @@
   virtualisation.docker = {
     enable = true;
   };
+
+  # TODO: Remnawave running on the host
+  # implement declaratively instead.
+  # Issue: unable to pass secret to the
+  # prisma run to resolve DB connection.
+
+  services.journald.storage = "persistent";
+
   networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      80
       443
       8443
     ];
@@ -49,10 +56,13 @@
     package = pkgs.caddy.withPlugins {
       plugins = [
         "github.com/mholt/caddy-webdav@v0.0.0-20241008162340-42168ba04c9d"
+        "github.com/mholt/caddy-l4@v0.0.0-20250428144642-57989befb7e6"
       ];
-      hash = "sha256-rrkUDnTPKehdKMBDaZdFbaEL2QOsHb3tn6dst2UclE8=";
+      hash = "sha256-QeT6d1OshCZnamY89VPpRL58lwWB1kfsjHN/GsNlZpc=";
     };
   };
+
+  # TODO: move mtprotoproxy to ns-beta
 
   systemd.services.mtprotoproxy.serviceConfig = {
     LoadCredential = [ "config:${config.sops.templates."config.py".path}" ];

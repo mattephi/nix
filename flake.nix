@@ -49,6 +49,14 @@
             ./hosts/ns-alpha/nixos/configuration.nix
           ];
         };
+        ns-beta = inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs system;
+          };
+          modules = [
+            ./hosts/ns-beta/nixos/configuration.nix
+          ];
+        };
       };
     };
 }

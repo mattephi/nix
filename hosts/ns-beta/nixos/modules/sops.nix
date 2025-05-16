@@ -4,9 +4,13 @@
     age.keyFile = "/var/lib/sops-nix/key.txt";
 
     secrets = {
-      "config.py" = {
-        format = "binary";
-        sopsFile = ../secrets/config.py;
+      "APP_PORT" = {
+        format = "json";
+        sopsFile = ../secrets/remnawave.json;
+      };
+      "SSL_CERT" = {
+        format = "json";
+        sopsFile = ../secrets/remnawave.json;
       };
       "Caddyfile" = {
         format = "binary";
@@ -15,7 +19,10 @@
     };
 
     templates = {
-      "config.py".content = ''${config.sops.placeholder."config.py"}'';
+      "remnanode.env".content = ''
+        APP_PORT=${config.sops.placeholder."APP_PORT"}
+        SSL_CERT=${config.sops.placeholder."SSL_CERT"}
+      '';
       "Caddyfile" = {
         owner = "caddy";
         content = ''${config.sops.placeholder."Caddyfile"}'';

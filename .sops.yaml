@@ -1,11 +1,19 @@
 keys:
   - &primary age14r4f8cpf7qslkdwu2v4lus5xfdzdy4dwql8xvxxkxhs230rdac3sjgexdz
 creation_rules:
-  - path_regex: secrets/config.py$
+  - path_regex: hosts/ns-alpha/nixos/secrets/config.py$
     key_groups:
     - age:
       - *primary
-  - path_regex: secrets/Caddyfile$
+  - path_regex: hosts/ns-alpha/nixos/secrets/Caddyfile$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-beta/nixos/secrets/Caddyfile$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-beta/nixos/secrets/Caddyfile$
     key_groups:
     - age:
       - *primary
