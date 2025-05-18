@@ -29,11 +29,26 @@ let
       value = "org.pwmt.zathura-pdf-mupdf.desktop";
     }) pdfTypes
   );
+
+  browserTypes = [
+    "text/html"
+    "x-scheme-handler/http"
+    "x-scheme-handler/https"
+    "x-scheme-handler/about"
+    "x-scheme-handler/unknown"
+  ];
+
+  broswerDefaults = lib.listToAttrs (
+    map (mt: {
+      name = mt;
+      value = "google-chrome.desktop";
+    }) browserTypes
+  );
 in
 
 {
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = imageDefaults // pdfDefaults;
+    defaultApplications = imageDefaults // pdfDefaults // broswerDefaults;
   };
 }

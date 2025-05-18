@@ -6,7 +6,6 @@
     inputs.overlays
     inputs.sops-nix.nixosModules.sops
     inputs.stylix.nixosModules.stylix
-    inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

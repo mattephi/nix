@@ -16,7 +16,15 @@
   # Modify the bootloader
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        windows = {
+          "11" = {
+            title = "Windows Boot Manager";
+            efiDeviceHandle = "FS1";
+          };
+        };
+      };
       efi.canTouchEfiVariables = true;
     };
     # Use the latest kernel
@@ -40,12 +48,12 @@
       options nvidia-drm modeset=1
       softdep nvidia pre: nvidia-drm
     '';
-    # Somehow this breakes hibernation, AVOID
-    # initrd.kernelModules = [
-    #   "nvidia"
-    #   "nvidia_modeset"
-    #   "nvidia_drm"
-    #   "nvidia_uvm"
-    # ];
+
+    initrd.kernelModules = [
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_drm"
+      "nvidia_uvm"
+    ];
   };
 }

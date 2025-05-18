@@ -10,6 +10,11 @@ let
     "git.confirmSync" = false;
     "git.autofetch" = true;
     "git.repositoryScanMaxDepth" = 5;
+    "extensions.experimental.affinity" = {
+      "asvetliakov.vscode-neovim" = 1;
+    };
+    "debug.onTaskErrors" = "abort";
+    "editor.minimap.enabled" = false;
     # nixd setup
     "nix.serverPath" = "nixd";
     "nix.enableLanguageServer" = true;
@@ -39,9 +44,11 @@ let
     ]
     ++ (with pkgs.vscode-marketplace; [
       # Support for Nix in all profiles
+
       jnoortheen.nix-ide
       mkhl.direnv
       arrterian.nix-env-selector
+      yzhang.markdown-all-in-one
     ]);
 in
 {
@@ -53,17 +60,17 @@ in
   ];
   programs.vscode = {
     enable = true;
-    #package = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: rec {
-    #  src = (
-    #    builtins.fetchTarball {
-    #      url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
-    #      sha256 = "1fdjpm6i66n74cd2bfb2brmilj1842dig2fjxg4r9ximlkl0kf50";
-    #    }
-    #  );
-    #  version = "latest";
-    #
-    #  buildInputs = oldAttrs.buildInputs ++ [ pkgs.krb5 ];
-    #});
+    # package = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: rec {
+    #   src = (
+    #     builtins.fetchTarball {
+    #       url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
+    #       sha256 = "0wmqjqg9jy2hz1dkgwdk2gqaprvk2wvsxya8q5ipf25skvfxzxm3";
+    #     }
+    #   );
+    #   version = "latest";
+
+    #   buildInputs = oldAttrs.buildInputs ++ [ pkgs.krb5 ];
+    # });
     profiles =
       pkgs.lib.mapAttrs
         (

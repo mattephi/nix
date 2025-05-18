@@ -2,7 +2,6 @@
   description = "mattenix flake";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
   inputs.disko.url = "github:nix-community/disko";

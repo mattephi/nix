@@ -16,7 +16,11 @@
     home-manager.enable = true;
     direnv.enable = true;
     btop.enable = true;
-    qutebrowser.enable = true;
+    # qutebrowser.enable = true;
+    # qutebrowser.package = pkgs.qutebrowser.override {
+    #   enableVulkan = true;
+    #   enableWideVine = true;
+    # };
     git = {
       enable = true;
       userName = "mattephi";

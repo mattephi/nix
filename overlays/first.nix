@@ -29,9 +29,9 @@ final: prev: {
   google-chrome = prev.google-chrome.override {
     commandLineArgs = "--enable-features=WaylandLinuxDrmSyncobj";
   };
-  vscode = prev.vscode.override {
-    commandLineArgs = "--use-gl=desktop";
-  };
+  # vscode = prev.vscode.override {
+  #   commandLineArgs = "--use-gl=desktop";
+  # };
   logseq = prev.logseq.overrideAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
     postInstall = ''
@@ -83,4 +83,13 @@ final: prev: {
         desktop
       ];
     };
+  luakit = prev.luakit.overrideAttrs (old: {
+    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
+    postInstall = ''
+      ${old.postInstall or ""}
+      wrapProgram $out/bin/luakit \
+        --set WEBKIT_DISABLE_DMABUF_RENDERER 1"
+        "
+    '';
+  });
 }

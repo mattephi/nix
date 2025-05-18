@@ -6,7 +6,6 @@
 }:
 {
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.cudaSupport = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -15,12 +14,8 @@
   security.rtkit.enable = true; # Real-time scheduling
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
-    extraOptions = "--default-runtime=nvidia";
   };
   networking.networkmanager.enable = true;
-
-  hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -70,18 +65,6 @@
     gvfs.enable = true;
     udisks2.enable = true;
     devmon.enable = true;
-
-    monado = {
-      enable = true;
-      highPriority = true;
-      defaultRuntime = true;
-      forceDefaultRuntime = true;
-    };
-
-    # wivrn = {
-    #   enable = true;
-    #   defaultRuntime = true;
-    # };
 
     xserver = {
       enable = true;
