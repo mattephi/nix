@@ -101,7 +101,7 @@
           sensitivity = -1.5;
         }
         {
-          name = "heatmoving-pulsar-mouse";
+          name = "pulsar-mouse";
           sensitivity = -1.5;
         }
       ];
