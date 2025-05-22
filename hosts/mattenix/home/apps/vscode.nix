@@ -47,8 +47,10 @@ let
 
       jnoortheen.nix-ide
       mkhl.direnv
+      ms-azuretools.vscode-docker
       arrterian.nix-env-selector
       yzhang.markdown-all-in-one
+      asvetliakov.vscode-neovim
     ]);
 in
 {
@@ -97,7 +99,6 @@ in
             extensions = with pkgs.vscode-marketplace; [
               ms-vscode.cpptools
               ms-vscode.cmake-tools
-              asvetliakov.vscode-neovim
               ms-vscode.cpptools-themes
               ms-vscode.cpptools-extension-pack # Needed to remove notification
             ];
@@ -109,6 +110,19 @@ in
               circledev.glsl-canvas
               ms-vscode.cmake-tools
               ms-vscode.cpptools
+            ];
+          };
+          python = {
+            extensions = with pkgs.vscode-marketplace; [
+              ms-python.python
+              ms-python.vscode-pylance
+              ms-python.debugpy
+              ms-toolsai.jupyter-keymap
+              ms-toolsai.jupyter-renderers
+              ms-toolsai.vscode-jupyter-cell-tags
+              ms-toolsai.vscode-jupyter-slideshow
+              ms-toolsai.jupyter-keymap
+
             ];
           };
         };
