@@ -35,6 +35,20 @@ let
         };
       };
     };
+    "github.copilot.chat.editor.temporalContext.enabled" = true;
+    "C_Cpp.copilotHover" = "enabled";
+    "github.copilot.nextEditSuggestions.enabled" = true;
+    "github.copilot.nextEditSuggestions.fixes" = true;
+    "github.copilot.chat.codesearch.enabled" = true;
+    "github.copilot.chat.agent.thinkingTool" = true;
+    "telemetry.feedback.enabled" = false;
+    "github.copilot.enable" = {
+      "*" = true;
+      "plaintext" = false;
+      "markdown" = false;
+      "scminput" = false;
+      "latex" = false;
+    };
   };
   commonExtensions =
     with pkgs.vscode-marketplace-release;
@@ -47,11 +61,13 @@ let
 
       jnoortheen.nix-ide
       mkhl.direnv
+      ms-vscode-remote.remote-containers
       ms-azuretools.vscode-docker
       arrterian.nix-env-selector
       yzhang.markdown-all-in-one
       asvetliakov.vscode-neovim
     ]);
+  commonBindings = [ ];
 in
 {
   stylix.targets.vscode.profileNames = [
@@ -59,6 +75,7 @@ in
     "tex"
     "cpp"
     "xr"
+    "pyt"
   ];
   programs.vscode = {
     enable = true;
@@ -80,11 +97,13 @@ in
           let
             overrides = cfg.userSettings or { };
             profileExtensions = cfg.extensions or [ ];
+            keybindings = cfg.keybindings or [ ];
           in
           cfg
           // {
             userSettings = commonSettings // overrides;
             extensions = profileExtensions ++ commonExtensions;
+            keybindings = commonBindings ++ keybindings;
           }
         )
         {
@@ -112,18 +131,21 @@ in
               ms-vscode.cpptools
             ];
           };
-          python = {
-            extensions = with pkgs.vscode-marketplace; [
-              ms-python.python
-              ms-python.vscode-pylance
-              ms-python.debugpy
-              ms-toolsai.jupyter-keymap
-              ms-toolsai.jupyter-renderers
-              ms-toolsai.vscode-jupyter-cell-tags
-              ms-toolsai.vscode-jupyter-slideshow
-              ms-toolsai.jupyter-keymap
-
-            ];
+          pyt = {
+            extensions =
+              with pkgs.vscode-marketplace;
+              [
+                ms-python.python
+                ms-python.vscode-pylance
+                ms-python.debugpy
+                ms-toolsai.jupyter-keymap
+                ms-toolsai.jupyter-renderers
+                ms-toolsai.vscode-jupyter-cell-tags
+                ms-toolsai.vscode-jupyter-slideshow
+              ]
+              ++ (with pkgs.vscode-marketplace-release; [
+                ms-toolsai.jupyter
+              ]);
           };
         };
   };
