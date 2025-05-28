@@ -87,6 +87,8 @@
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         "opacity 0.85 0.85,class:.*$terminal.*"
+	"fullscreen,initialTitle:.*MuJoCo.*"
+	"monitor HDMI-A-1, initialTitle:.*MuJoCo.*"
       ];
 
       input = {
