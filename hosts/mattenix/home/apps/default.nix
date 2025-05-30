@@ -6,6 +6,7 @@
     ./dunst.nix
     ./waybar.nix
     ./vscode.nix
+    ./zellij.nix
     ./zathura.nix
     ./ghostty.nix
     ./hyprland.nix
