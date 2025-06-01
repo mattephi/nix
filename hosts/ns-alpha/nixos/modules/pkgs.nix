@@ -36,7 +36,10 @@
     #     3003
     #   ];
     # };
-    interfaces.br-53c0ce9bc047 = {
+    # TODO: either fix interface name or
+    # find another solution or dynamically
+    # update this field based on network.
+    interfaces.br-f5cb8ddccbe3 = {
       allowedTCPPorts = [
         3003
       ];
@@ -218,7 +221,7 @@
       ];
       extraOptions = [
         "--add-host"
-        "host.docker.internal:172.19.0.1"
+        "host.docker.internal:host-gateway"
       ];
     };
     "litellm" = {
@@ -251,14 +254,14 @@
       environmentFiles = [
         "${config.sops.templates."litellm.postgres.env".path}"
       ];
-      ports = [
-        "127.0.0.1:5432:5432"
-      ];
-      volumes = [
-        "postgres_data:/var/lib/postgresql/data"
-      ];
       networks = [
         "litellm-bridge"
+      ];
+      # ports = [
+      #   "127.0.0.1:5432:5432"
+      # ];
+      volumes = [
+        "postgres_data:/var/lib/postgresql/data"
       ];
     };
   };
