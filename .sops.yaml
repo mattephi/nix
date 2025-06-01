@@ -9,6 +9,30 @@ creation_rules:
     key_groups:
     - age:
       - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/open-webui.env$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/searx$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.yaml$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.env$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.postgres.env$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.prometheus.yaml$
+    key_groups:
+    - age:
+      - *primary
   - path_regex: hosts/ns-beta/nixos/secrets/Caddyfile$
     key_groups:
     - age:
