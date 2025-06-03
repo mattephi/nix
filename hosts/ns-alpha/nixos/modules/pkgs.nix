@@ -42,6 +42,7 @@
     interfaces.br-f5cb8ddccbe3 = {
       allowedTCPPorts = [
         3003
+        3005
       ];
     };
   };
@@ -73,6 +74,11 @@
       ];
       hash = "sha256-ztG96Y3CmnC6GxP/i9B95OiLMoDieKAqVL/sjHlM+KU=";
     };
+  };
+  services.tika = {
+    enable = true;
+    port = 3005;
+    listenAddress = "0.0.0.0";
   };
 
   services.searx = {
