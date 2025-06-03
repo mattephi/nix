@@ -21,8 +21,10 @@
     vim
     unzip
     libnotify
+    egl-wayland
     pavucontrol
     home-manager
+    nvidia-vaapi-driver
     texlive.combined.scheme-full
   ];
 
@@ -66,18 +68,18 @@
     udisks2.enable = true;
     devmon.enable = true;
 
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+
     xserver = {
       enable = true;
       exportConfiguration = true;
-      screenSection = ''
-        Option "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
-        Option "TripleBuffer" "on"
-      '';
-
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
+      # screenSection = ''
+      #   Option "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+      #   Option "TripleBuffer" "on"
+      # '';
 
       xkb = {
         layout = "us,ru";

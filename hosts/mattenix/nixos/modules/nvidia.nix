@@ -13,12 +13,18 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
+    # Required for Wayland
     modesetting.enable = true; # Required for Wayland
-    powerManagement.enable = true; # Required for hibernate
+    # Required for hibernate
+    powerManagement.enable = true;
+    # Turns off gpu when not in use
     powerManagement.finegrained = false;
-    forceFullCompositionPipeline = false; # NOTE: may cause issues with WebGL
+    # Use open-source kernel module
     open = true;
+    # Enable nvidia-settings menu
     nvidiaSettings = true;
+    # Off for better webgl performance
+    forceFullCompositionPipeline = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 }
