@@ -83,13 +83,29 @@ final: prev: {
         desktop
       ];
     };
-  luakit = prev.luakit.overrideAttrs (old: {
-    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
-    postInstall = ''
-      ${old.postInstall or ""}
-      wrapProgram $out/bin/luakit \
-        --set WEBKIT_DISABLE_DMABUF_RENDERER 1"
-        "
-    '';
+  nyxt = prev.nyxt.overrideAttrs (old: rec {
+    version = "4.0.0-pre-release-8";
+    src = prev.fetchgit {
+      url = "https://github.com/atlas-engineer/nyxt.git";
+      rev = version;
+      fetchSubmodules = true;
+      sha256 = "QYEB/4r8dJ6GEKAIBT0zckFUj2u+nqcTAEcV3yLZTso=";
+    };
+    buildInputs = old.buildInputs or [ ] ++ [ prev.sqlite ];
+    LD_LIBRARY_PATH = prev.lib.makeLibraryPath (
+      with prev;
+      [
+        sqlite
+        glib
+        gobject-introspection
+        gdk-pixbuf
+        cairo
+        pango
+        gtk3
+        webkitgtk_4_1
+        openssl
+        libfixposix
+      ]
+    );
   });
 }

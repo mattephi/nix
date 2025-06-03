@@ -35,6 +35,7 @@
     gcc # TODO: remove
     sops
     nixd
+    nyxt
     nemo
     codex # TODO: configure secret
     neovim
