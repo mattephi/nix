@@ -33,16 +33,20 @@
 
   home.packages = with pkgs; [
     gcc # TODO: remove
+    vlc
     sops
     nixd
-    nyxt
+    # nyxt
     nemo
-    codex # TODO: configure secret
+    # codex # TODO: configure secret
     neovim
+    ffmpeg
     devenv
     zotero
-    logseq # TODO: remove
+    # logseq # TODO: remove
     discord
+    gifsicle
+    # filezilla
     obsidian-fhs
     hyprshot
     oculante
@@ -55,9 +59,8 @@
     nix-output-monitor
 
     # Wine support
-    wineWowPackages.staging
+    # wineWowPackages.staging
     # wineWowPackages.waylandFull
-
   ];
 
   # Gracefully handle services restart

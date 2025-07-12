@@ -18,12 +18,12 @@
     loader = {
       systemd-boot = {
         enable = true;
-        windows = {
-          "11" = {
-            title = "Windows Boot Manager";
-            efiDeviceHandle = "FS1";
-          };
-        };
+        # windows = {
+        #   "11" = {
+        #     title = "Windows Boot Manager";
+        #     efiDeviceHandle = "FS1";
+        #   };
+        # };
       };
       efi.canTouchEfiVariables = true;
     };
