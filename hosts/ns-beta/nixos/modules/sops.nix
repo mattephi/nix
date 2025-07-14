@@ -16,6 +16,11 @@
         format = "binary";
         sopsFile = ../secrets/Caddyfile;
       };
+      "xray" = {
+        format = "json";
+        sopsFile = ../secrets/xray.json;
+        key = "";
+      };
     };
 
     templates = {
@@ -26,6 +31,9 @@
       "Caddyfile" = {
         owner = "caddy";
         content = ''${config.sops.placeholder."Caddyfile"}'';
+      };
+      "xray" = {
+        content = ''${config.sops.placeholder."xray"}'';
       };
     };
   };

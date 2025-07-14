@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
-  fonts.packages =
+  /*
+    fonts.packages =
     with pkgs;
     [
       font-awesome
@@ -10,4 +11,5 @@
       jetbrains-mono
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  */
 }

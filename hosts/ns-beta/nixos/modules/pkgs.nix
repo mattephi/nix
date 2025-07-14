@@ -12,30 +12,18 @@
     "flakes"
   ];
 
+  boot.kernelModules = [ "tcp_bbr" ];
+  boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+  boot.kernel.sysctl."net.core.default_qdisc" = "fq";
+
   security.rtkit.enable = true; # Real-time scheduling
-  virtualisation.docker = {
-    enable = false;
-  };
-  virtualisation.oci-containers.containers = {
-    "remnanode" = {
-      image = "remnawave/node:latest";
-      hostname = "remnanode";
-      networks = [ "host" ];
-      environmentFiles = [
-        config.sops.templates."remnanode.env".path
-      ];
-    };
-  };
   networking.networkmanager.enable = true;
   networking.firewall = {
-    enable = true;
+    enable = false;
     allowedTCPPorts = [
+      80
       443
-      45892
     ];
-    interfaces.podman1 = {
-      allowedUDPPorts = [ 53 ];
-    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -60,5 +48,10 @@
   services.caddy = {
     enable = true;
     configFile = "${config.sops.templates."Caddyfile".path}";
+  };
+
+  services.xray = {
+    enable = true;
+    settingsFile = "${config.sops.templates."xray".path}";
   };
 }

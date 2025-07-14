@@ -37,7 +37,15 @@ creation_rules:
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-beta/nixos/secrets/Caddyfile$
+  - path_regex: hosts/ns-beta/nixos/secrets/remnawave.json$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-gamma/nixos/secrets/hysteria.yaml$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-beta/nixos/secrets/xray.json$
     key_groups:
     - age:
       - *primary
