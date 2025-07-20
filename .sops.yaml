@@ -1,47 +1,31 @@
 keys:
   - &primary age14r4f8cpf7qslkdwu2v4lus5xfdzdy4dwql8xvxxkxhs230rdac3sjgexdz
 creation_rules:
-  - path_regex: hosts/ns-alpha/nixos/secrets/config.py$
+  - path_regex: hosts/ns-alpha/nixos/modules/services/mtprotoproxy/config.py$
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/Caddyfile$
+  - path_regex: hosts/ns-alpha/nixos/modules/containers/litellm/litellm.yaml$
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/open-webui.env$
+  - path_regex: hosts/ns-alpha/nixos/modules/containers/litellm/litellm.env$
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/searx$
+  - path_regex: hosts/ns-alpha/nixos/modules/containers/maybe/maybe.env$
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.yaml$
+  - path_regex: hosts/ns-alpha/nixos/modules/services/caddy/Caddyfile$
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.env$
-    key_groups:
-    - age:
-      - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.postgres.env$
-    key_groups:
-    - age:
-      - *primary
-  - path_regex: hosts/ns-alpha/nixos/secrets/litellm.prometheus.yaml$
+  - path_regex: hosts/ns-alpha/nixos/modules/services/searx/searx$
     key_groups:
     - age:
       - *primary
   - path_regex: hosts/ns-beta/nixos/secrets/Caddyfile$
-    key_groups:
-    - age:
-      - *primary
-  - path_regex: hosts/ns-beta/nixos/secrets/remnawave.json$
-    key_groups:
-    - age:
-      - *primary
-  - path_regex: hosts/ns-gamma/nixos/secrets/hysteria.yaml$
     key_groups:
     - age:
       - *primary

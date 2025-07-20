@@ -19,7 +19,7 @@
   security.rtkit.enable = true; # Real-time scheduling
   networking.networkmanager.enable = true;
   networking.firewall = {
-    enable = false;
+    enable = true;
     allowedTCPPorts = [
       80
       443
