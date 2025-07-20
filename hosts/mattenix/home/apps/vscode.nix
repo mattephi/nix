@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   commonSettings = {
-    # "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
     "terminal.integrated.fontFamily" = "'JetBrainsMono NF'";
     "editor.wordWrap" = "bounded";
     "editor.wordWrapColumn" = 80;
@@ -57,13 +56,12 @@ let
       github.copilot-chat
     ]
     ++ (with pkgs.vscode-marketplace; [
-      # Support for Nix in all profiles
-
-      jnoortheen.nix-ide
       mkhl.direnv
-      ms-vscode-remote.remote-containers
-      ms-azuretools.vscode-docker
+      jnoortheen.nix-ide
       arrterian.nix-env-selector
+      ms-azuretools.vscode-docker
+      ms-azuretools.vscode-containers
+      ms-vscode-remote.remote-containers
       yzhang.markdown-all-in-one
       asvetliakov.vscode-neovim
     ]);
@@ -79,17 +77,6 @@ in
   ];
   programs.vscode = {
     enable = true;
-    # package = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: rec {
-    #   src = (
-    #     builtins.fetchTarball {
-    #       url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
-    #       sha256 = "0wmqjqg9jy2hz1dkgwdk2gqaprvk2wvsxya8q5ipf25skvfxzxm3";
-    #     }
-    #   );
-    #   version = "latest";
-
-    #   buildInputs = oldAttrs.buildInputs ++ [ pkgs.krb5 ];
-    # });
     profiles =
       pkgs.lib.mapAttrs
         (
@@ -119,7 +106,7 @@ in
               ms-vscode.cpptools
               ms-vscode.cmake-tools
               ms-vscode.cpptools-themes
-              ms-vscode.cpptools-extension-pack # Needed to remove notification
+              ms-vscode.cpptools-extension-pack
             ];
           };
           xr = {
