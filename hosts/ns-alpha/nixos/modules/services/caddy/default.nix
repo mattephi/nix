@@ -1,14 +1,34 @@
 { config, pkgs, ... }:
 {
-  sops.secrets.Caddyfile = {
-    format = "binary";
-    owner = "caddy";
-    sopsFile = ./Caddyfile;
-  };
-
   services.caddy = {
     enable = true;
-    configFile = config.sops.secrets.Caddyfile.path;
+    globalConfig = ''
+      order webdav before file_server
+    '';
+    virtualHosts = {
+      "maybe.mattephi.com".extraConfig = ''
+        reverse_proxy http://127.0.0.1:3000
+      '';
+      "litellm.mattephi.com".extraConfig = ''
+        reverse_proxy http://127.0.0.1:3004
+      '';
+      "mkfd.mattephi.com".extraConfig = ''
+        reverse_proxy http://127.0.0.1:3005
+      '';
+      "search.mattephi.com".extraConfig = ''
+        basic_auth { 
+          mattephi $2a$12$.V6s5o/3Pt5UDVvVkRhIEeKTNbcx.C7WBpsA96PkkmyQqRiWns1Gm 
+        }
+        reverse_proxy http://127.0.0.1:3003
+      '';
+      "webdav.mattephi.com".extraConfig = ''
+        root * /data/webdav
+        basic_auth {
+          mattephi $2a$12$9iuTVmVmQdwhbcR5fpWT0e1ivXkpxbnj1TOQdoNescN0yPt7bbcti
+        }
+        webdav
+      '';
+    };
     package = pkgs.caddy.withPlugins {
       plugins = [
         "github.com/mholt/caddy-webdav@v0.0.0-20241008162340-42168ba04c9d"

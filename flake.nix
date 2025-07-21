@@ -8,6 +8,7 @@
   inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
   inputs.sops-nix.url = "github:Mic92/sops-nix";
   inputs.sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
   inputs.stylix.url = "github:danth/stylix";
   inputs.hyprland.url = "github:hyprwm/Hyprland";
   inputs.nix-wallpaper.url = "github:lunik1/nix-wallpaper";

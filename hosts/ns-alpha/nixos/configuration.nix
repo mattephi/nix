@@ -11,6 +11,7 @@
     inputs.overlays
     inputs.disko.nixosModules.disko
     inputs.sops-nix.nixosModules.sops
+    inputs.simple-nixos-mailserver.nixosModule
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
