@@ -21,14 +21,6 @@ creation_rules:
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/modules/services/caddy/Caddyfile$
-    key_groups:
-    - age:
-      - *primary
-  - path_regex: hosts/ns-alpha/nixos/modules/services/caddy/hashes.json$
-    key_groups:
-    - age:
-      - *primary
   - path_regex: hosts/ns-alpha/nixos/modules/services/mailserver/passwords.json$
     key_groups:
     - age:
