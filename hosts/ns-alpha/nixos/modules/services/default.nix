@@ -5,6 +5,7 @@
   imports = [
     ./caddy
     ./searx
+    ./freshrss
     ./mailserver
     ./mtprotoproxy
   ];

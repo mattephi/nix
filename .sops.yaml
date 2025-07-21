@@ -25,6 +25,10 @@ creation_rules:
     key_groups:
     - age:
       - *primary
+  - path_regex: hosts/ns-alpha/nixos/modules/services/freshrss/passwords.json$
+    key_groups:
+    - age:
+      - *primary
   - path_regex: hosts/ns-alpha/nixos/modules/services/searx/searx$
     key_groups:
     - age:
