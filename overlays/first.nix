@@ -84,12 +84,12 @@ final: prev: {
       ];
     };
   nyxt = prev.nyxt.overrideAttrs (old: rec {
-    version = "4.0.0-pre-release-8";
+    version = "4.0.0-pre-release-11";
     src = prev.fetchgit {
       url = "https://github.com/atlas-engineer/nyxt.git";
       rev = version;
       fetchSubmodules = true;
-      sha256 = "QYEB/4r8dJ6GEKAIBT0zckFUj2u+nqcTAEcV3yLZTso=";
+      sha256 = "4vp4Pru4Z1wsUJ81uoQQEIxvCyo1dxgQ4DZlXUNbL1g=";
     };
     buildInputs = old.buildInputs or [ ] ++ [ prev.sqlite ];
     LD_LIBRARY_PATH = prev.lib.makeLibraryPath (
@@ -105,6 +105,7 @@ final: prev: {
         webkitgtk_4_1
         openssl
         libfixposix
+        enchant
       ]
     );
   });

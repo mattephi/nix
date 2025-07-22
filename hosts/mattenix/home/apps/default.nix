@@ -4,7 +4,7 @@
     ./rofi.nix
     ./fish.nix
     ./dunst.nix
-    ./waybar.nix
+    ./waybar
     ./vscode.nix
     # ./zellij.nix
     ./zathura.nix

@@ -31,12 +31,14 @@
     };
   };
 
+  stylix.targets.waybar.enable = false;
+
   home.packages = with pkgs; [
     gcc # TODO: remove
     vlc
     sops
     nixd
-    # nyxt
+    nyxt
     nemo
     # codex # TODO: configure secret
     neovim
