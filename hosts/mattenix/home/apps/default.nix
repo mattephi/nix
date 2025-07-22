@@ -3,7 +3,8 @@
     ./xdg.nix
     ./rofi.nix
     ./fish.nix
-    ./dunst.nix
+    # ./dunst.nix
+    ./swaync
     ./waybar
     ./vscode.nix
     # ./zellij.nix
