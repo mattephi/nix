@@ -38,24 +38,19 @@
     vlc
     sops
     nixd
-    nyxt
     nemo
-    # codex # TODO: configure secret
     neovim
     ffmpeg
     devenv
     zotero
-    # logseq # TODO: remove
     discord
     gifsicle
-    # filezilla
     obsidian-fhs
     hyprshot
     oculante
     xorg.xeyes
     apple-cursor # XCURSOR theme
     google-chrome
-    # wlx-overlay-s # VR overlay
     telegram-desktop
     nixfmt-rfc-style
     nix-output-monitor
