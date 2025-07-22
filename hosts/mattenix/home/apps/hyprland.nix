@@ -130,6 +130,8 @@
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen"
+        "SUPER_CTRL, left, workspace, m-1"
+        "SUPER_CTRL, right, workspace, m+1"
         # Screencapture
         "SUPER_CTRL_SHIFT, 4, exec, hyprshot -m region --clipboard-only"
         "SUPER_CTRL, 4, exec, hyprshot -m region -o /home/mattephi/Pictures/Hyprshot"
