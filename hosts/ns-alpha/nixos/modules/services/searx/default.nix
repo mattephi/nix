@@ -1,4 +1,8 @@
 { config, ... }:
+let
+  hostname = "search.mattephi.com";
+  url = "https://${hostname}";
+in
 {
   sops.secrets.searx = {
     format = "binary";
@@ -81,7 +85,7 @@
       };
 
       server = {
-        base_url = "https://search.mattephi.com";
+        base_url = "${url}";
         port = 3002;
         bind_address = "127.0.0.1";
         secret_key = config.sops.secrets.searx.path;
@@ -116,4 +120,10 @@
       ];
     };
   };
+  services.caddy.virtualHosts."${hostname}".extraConfig = ''
+    basic_auth { 
+      mattephi $2a$12$.V6s5o/3Pt5UDVvVkRhIEeKTNbcx.C7WBpsA96PkkmyQqRiWns1Gm 
+    }
+    reverse_proxy http://127.0.0.1:3003
+  '';
 }

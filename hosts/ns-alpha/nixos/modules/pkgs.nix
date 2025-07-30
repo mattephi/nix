@@ -24,6 +24,7 @@
     enable = true;
     allowedTCPPorts = [
       25
+      80
       443
       465
       8443

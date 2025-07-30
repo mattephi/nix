@@ -7,6 +7,7 @@
     ./searx
     ./freshrss
     ./mailserver
+    ./firefly-iii
     ./mtprotoproxy
   ];
 }

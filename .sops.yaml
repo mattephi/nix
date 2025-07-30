@@ -13,10 +13,6 @@ creation_rules:
     key_groups:
     - age:
       - *primary
-  - path_regex: hosts/ns-alpha/nixos/modules/containers/maybe/maybe.env$
-    key_groups:
-    - age:
-      - *primary
   - path_regex: hosts/ns-alpha/nixos/modules/containers/mkfd/.env$
     key_groups:
     - age:
@@ -26,6 +22,10 @@ creation_rules:
     - age:
       - *primary
   - path_regex: hosts/ns-alpha/nixos/modules/services/freshrss/passwords.json$
+    key_groups:
+    - age:
+      - *primary
+  - path_regex: hosts/ns-alpha/nixos/modules/services/firefly-iii/app-key$
     key_groups:
     - age:
       - *primary

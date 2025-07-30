@@ -3,6 +3,9 @@
   pkgs,
   ...
 }:
+let
+  hostname = "litellm.mattephi.com";
+in
 {
 
   sops.secrets."litellm.env" = {
@@ -69,4 +72,8 @@
       "postgres_data:/var/lib/postgresql/data"
     ];
   };
+
+  services.caddy.virtualHosts."${hostname}".extraConfig = ''
+    reverse_proxy http://127.0.0.1:3004
+  '';
 }
