@@ -83,4 +83,30 @@ final: prev: {
         desktop
       ];
     };
+  nyxt = prev.nyxt.overrideAttrs (old: rec {
+    version = "4.0.0-pre-release-13";
+    src = prev.fetchgit {
+      url = "https://github.com/atlas-engineer/nyxt.git";
+      rev = version;
+      fetchSubmodules = true;
+      sha256 = "bhB1TptrmJNswe8JouNqO9J9AGrSh3R38MwwlrN1LSA=";
+    };
+    buildInputs = old.buildInputs or [ ] ++ [ prev.sqlite ];
+    LD_LIBRARY_PATH = prev.lib.makeLibraryPath (
+      with prev;
+      [
+        sqlite
+        glib
+        gobject-introspection
+        gdk-pixbuf
+        cairo
+        pango
+        gtk3
+        webkitgtk_4_1
+        openssl
+        libfixposix
+        enchant
+      ]
+    );
+  });
 }

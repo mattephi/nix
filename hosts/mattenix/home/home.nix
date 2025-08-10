@@ -32,6 +32,7 @@
   };
 
   stylix.targets.waybar.enable = false;
+  stylix.polarity = "dark";
 
   home.packages = with pkgs; [
     gcc # TODO: remove
