@@ -10,6 +10,11 @@
     sopsFile = ./passwords.json;
     key = "rwbin";
   };
+  sops.secrets.mailserver-p3 = {
+    format = "json";
+    sopsFile = ./passwords.json;
+    key = "contact";
+  };
 
   mailserver = {
     enable = true;
@@ -28,6 +33,9 @@
           "rwbin@mattephi.com"
           "rw@mattephi.com"
         ];
+      };
+      "contact@mattephi.com" = {
+        hashedPasswordFile = config.sops.secrets.mailserver-p3.path;
       };
     };
     certificateScheme = "manual";

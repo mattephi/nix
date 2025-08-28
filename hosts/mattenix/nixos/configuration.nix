@@ -23,7 +23,7 @@
     ./modules/stylix.nix
     ./modules/nvidia.nix
     ./modules/locale.nix
-    ./modules/distributed.nix
+    # ./modules/distributed.nix
     ./modules/environment.nix
     ./modules/hardware-extra.nix
     ./hardware-configuration.nix

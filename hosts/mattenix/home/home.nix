@@ -50,6 +50,8 @@
     hyprshot
     oculante
     xorg.xeyes
+    obs-studio
+    code-cursor
     apple-cursor # XCURSOR theme
     google-chrome
     telegram-desktop

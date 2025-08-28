@@ -74,6 +74,7 @@ in
     "cpp"
     "xr"
     "pyt"
+    "qrt"
   ];
   programs.vscode = {
     enable = true;
@@ -93,7 +94,7 @@ in
             keybindings = commonBindings ++ keybindings;
           }
         )
-        {
+        rec {
           default = { };
           tex = {
             extensions = with pkgs.vscode-marketplace; [
@@ -122,7 +123,7 @@ in
             extensions =
               with pkgs.vscode-marketplace;
               [
-                ms-python.python
+                # ms-python.python
                 ms-python.vscode-pylance
                 ms-python.debugpy
                 ms-toolsai.jupyter-keymap
@@ -133,6 +134,12 @@ in
               ++ (with pkgs.vscode-marketplace-release; [
                 ms-toolsai.jupyter
               ]);
+          };
+          qrt = {
+            extensions =
+              (pyt.extensions or [ ])
+              ++ (tex.extensions or [ ])
+              ++ (with pkgs.vscode-marketplace; [ quarto.quarto ]);
           };
         };
   };

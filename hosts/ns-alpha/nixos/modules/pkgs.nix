@@ -23,11 +23,15 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      25
       80
       443
-      465
       8443
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 60000;
+        to = 61000;
+      }
     ];
   };
 
@@ -37,5 +41,6 @@
 
   programs = {
     fish.enable = true;
+    mosh.enable = true;
   };
 }

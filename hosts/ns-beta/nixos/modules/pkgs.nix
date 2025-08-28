@@ -24,6 +24,12 @@
       80
       443
     ];
+    allowedUDPPortRanges = [
+      {
+        from = 60000;
+        to = 61000;
+      }
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -35,6 +41,7 @@
 
   programs = {
     fish.enable = true;
+    mosh.enable = true;
   };
 
   services = {
