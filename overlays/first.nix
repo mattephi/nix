@@ -1,46 +1,9 @@
 final: prev: {
-  # Use newer version of WiVRn
-  wivrn = prev.wivrn.overrideAttrs {
-    version = "0.24.1";
-    src = prev.fetchFromGitHub {
-      owner = "WiVRn";
-      repo = "WiVRn";
-      rev = "e7f67b9";
-      sha256 = "aWQcGIrBoDAO7XqWb3dQLBKg5RZYxC7JxwZ+OBSwmEs=";
-    };
-  };
-  # Use newer version of basalt-monado and enable CUDA support
-  # TODO: make cuda optional
-  basalt-monado = prev.basalt-monado.overrideAttrs (old: {
-    version = "latest";
-    src = prev.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "mateosss";
-      repo = "basalt";
-      rev = "0ced9e5ad280fc38d3f0ec5d0d33795f888760e8";
-      sha256 = "+mgyuHEJZU6eRY4J+4XISYOFCWTcxWqrps512clynpc=";
-      fetchSubmodules = true;
-    };
-    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.autoAddDriverRunpath ];
-    buildInputs = old.buildInputs or [ ] ++ [ prev.cudaPackages.cudatoolkit ];
-  });
   # Fix flickering in some electron apps
   # TODO: At some point it should be unnecessary
   google-chrome = prev.google-chrome.override {
     commandLineArgs = "--enable-features=WaylandLinuxDrmSyncobj";
   };
-  # vscode = prev.vscode.override {
-  #   commandLineArgs = "--use-gl=desktop";
-  # };
-  logseq = prev.logseq.overrideAttrs (old: {
-    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
-    postInstall = ''
-      ${old.postInstall or ""}
-      wrapProgram $out/bin/logseq \
-        --add-flags --use-gl=desktop"
-        "
-    '';
-  });
   discord = prev.discord.overrideAttrs (old: {
     nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ prev.makeWrapper ];
     postInstall = ''
@@ -49,6 +12,20 @@ final: prev: {
         --add-flags --use-gl=desktop"
         "
     '';
+  });
+  # Recent version
+  firefly-iii = prev.firefly-iii.overrideAttrs (old: rec {
+    src = prev.fetchFromGitHub {
+      owner = "firefly-iii";
+      repo = "firefly-iii";
+      rev = "0aa90b945395180f7048a218b8f0b496457ab2d1";
+      sha256 = "sha256-qP5r3nSQe9O2fyRk3k3xRoiz6bdzpySm95XgpQjc0lg=";
+    };
+    npmDeps = prev.fetchNpmDeps {
+      inherit src;
+      name = "firefly-iii-npm-deps";
+      hash = "sha256-26uf7c4fwnmMZ8RW7BF+EFa4QaUhIKEQ3n3VMO1LVBQ=";
+    };
   });
   # FHS obsidian
   obsidian-fhs =
@@ -83,30 +60,4 @@ final: prev: {
         desktop
       ];
     };
-  nyxt = prev.nyxt.overrideAttrs (old: rec {
-    version = "4.0.0-pre-release-13";
-    src = prev.fetchgit {
-      url = "https://github.com/atlas-engineer/nyxt.git";
-      rev = version;
-      fetchSubmodules = true;
-      sha256 = "bhB1TptrmJNswe8JouNqO9J9AGrSh3R38MwwlrN1LSA=";
-    };
-    buildInputs = old.buildInputs or [ ] ++ [ prev.sqlite ];
-    LD_LIBRARY_PATH = prev.lib.makeLibraryPath (
-      with prev;
-      [
-        sqlite
-        glib
-        gobject-introspection
-        gdk-pixbuf
-        cairo
-        pango
-        gtk3
-        webkitgtk_4_1
-        openssl
-        libfixposix
-        enchant
-      ]
-    );
-  });
 }

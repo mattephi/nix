@@ -16,11 +16,6 @@
     home-manager.enable = true;
     direnv.enable = true;
     btop.enable = true;
-    # qutebrowser.enable = true;
-    # qutebrowser.package = pkgs.qutebrowser.override {
-    #   enableVulkan = true;
-    #   enableWideVine = true;
-    # };
     git = {
       enable = true;
       userName = "mattephi";
@@ -35,7 +30,6 @@
   stylix.polarity = "dark";
 
   home.packages = with pkgs; [
-    gcc # TODO: remove
     vlc
     sops
     nixd
@@ -43,24 +37,16 @@
     neovim
     ffmpeg
     devenv
+    nomacs
     zotero
     discord
-    gifsicle
-    obsidian-fhs
     hyprshot
-    oculante
-    xorg.xeyes
     obs-studio
-    code-cursor
-    apple-cursor # XCURSOR theme
+    obsidian-fhs
+    apple-cursor
     google-chrome
     telegram-desktop
     nixfmt-rfc-style
-    nix-output-monitor
-
-    # Wine support
-    # wineWowPackages.staging
-    # wineWowPackages.waylandFull
   ];
 
   # Gracefully handle services restart

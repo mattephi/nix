@@ -12,7 +12,7 @@ let
   imageDefaults = lib.listToAttrs (
     map (mt: {
       name = mt;
-      value = "oculante.desktop";
+      value = "nomacs.desktop";
     }) imageTypes
   );
 

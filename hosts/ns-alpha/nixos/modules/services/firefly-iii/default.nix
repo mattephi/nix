@@ -20,6 +20,8 @@ in
     settings = {
       APP_URL = url;
       APP_KEY_FILE = config.sops.secrets.app-key.path;
+      ENABLE_EXCHANGE_RATES = true;
+      ENABLE_EXTERNAL_RATES = true;
     };
   };
 

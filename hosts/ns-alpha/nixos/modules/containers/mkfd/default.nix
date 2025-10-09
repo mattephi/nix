@@ -19,7 +19,7 @@ in
   virtualisation.oci-containers.backend = "docker";
 
   virtualisation.oci-containers.containers."mkfd-mkfd" = {
-    image = "tbosk/mkfd:latest";
+    image = "tbosk/mkfd:2.0.1";
     environmentFiles = [
       config.sops.secrets."mkfd.env".path
     ];
