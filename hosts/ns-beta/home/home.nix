@@ -16,9 +16,9 @@
     btop.enable = true;
     git = {
       enable = true;
-      userName = "mattephi";
-      userEmail = "contact@mattephi.com";
-      extraConfig = {
+      settings = {
+        user.name = "mattephi";
+        user.email = "contact@mattephi.com";
         init.defaultBranch = "master";
       };
     };
