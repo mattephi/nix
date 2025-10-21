@@ -4,10 +4,9 @@
 
   imports = [
     ./caddy
-    ./searx
+    ./dante
     ./freshrss
     ./mailserver
     ./firefly-iii
-    ./mtprotoproxy
   ];
 }

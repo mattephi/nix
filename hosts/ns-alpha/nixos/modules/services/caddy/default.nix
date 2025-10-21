@@ -42,7 +42,7 @@
       plugins = [
         "github.com/mholt/caddy-webdav@v0.0.0-20250805175825-7a5c90d8bf90"
       ];
-      hash = "sha256-Pf72UOUp0qIQw9JtuZB5CxIHERP19MZ2j4C0PNvrzcA=";
+      hash = "sha256-iw2jPad2hiuGOd1bzS59eLzT8Ro2O9mtBG0Yg5h+G+w=";
     };
   };
 }
