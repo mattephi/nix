@@ -21,6 +21,11 @@
         sopsFile = ../secrets/xray.json;
         key = "";
       };
+      "mtg-secret" = {
+        format = "json";
+        key = "secret";
+        sopsFile = ../secrets/mtg.json;
+      };
     };
 
     templates = {
@@ -35,6 +40,10 @@
       "xray" = {
         content = ''${config.sops.placeholder."xray"}'';
       };
+      "mtg.toml".content = ''
+        secret = "${config.sops.placeholder."mtg-secret"}"
+        bind-to = "0.0.0.0:8443"
+      '';
     };
   };
 }

@@ -2,6 +2,9 @@
   description = "mattenix flake";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  # Recent nixpkgs used only to build mtg (needs Go >= 1.26, absent from the
+  # pinned system nixpkgs). Keeps the rest of the system on the stable pin.
+  inputs.nixpkgs-bleed.url = "github:nixos/nixpkgs/331800de5053fcebacf6813adb5db9c9dca22a0c";
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
   inputs.disko.url = "github:nix-community/disko";

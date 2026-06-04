@@ -6,5 +6,6 @@
     ./fonts.nix
     ./locale.nix
     ./environment.nix
+    ./services/mtg
   ];
 }
